@@ -1,0 +1,7 @@
+[general]
+name=Delete_Via_Dropdown
+description=populate dropdown menu
+author=tyhol
+icon=icon.svg
+version=0.1
+homepage=
