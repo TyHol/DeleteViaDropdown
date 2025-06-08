@@ -34,11 +34,19 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg983" />
   <path
-     style="fill:#ff0000;fill-rule:evenodd;stroke:#00ffff;stroke-width:90.7088"
-     d="m 67.5536,-865.53051 c 3.166576,-0.52777 795.33808,771.06103 795.33808,771.06103"
-     id="path1" />
-  <path
-     style="fill:#ff0000;fill-rule:evenodd;stroke:#00ffff;stroke-width:90.7088"
-     d="M 802.72676,-889.27982 84.442,-92.8862"
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#010000;stroke-width:90.7088;stroke-opacity:0.99000001"
+     d="m 100.27488,-642.81474 184.71687,550.4563 326.68501,5.27764 176.80044,-550.45631"
      id="path2" />
+  <path
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#010000;stroke-width:90.7088;stroke-opacity:0.99"
+     d="M 336.34207,-525.76457 530.7718,-367.2096"
+     id="path4" />
+  <path
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#010000;stroke-width:90.7088;stroke-opacity:0.99"
+     d="M 525.1237,-541.48434 368.37822,-338.29578"
+     id="path5" />
+  <path
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#010000;stroke-width:90.7088;stroke-opacity:0.99"
+     d="m 179.96702,-716.17372 268.6311,-132.99616 269.68664,129.30182"
+     id="path6" />
 </svg>
