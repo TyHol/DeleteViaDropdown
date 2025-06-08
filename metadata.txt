@@ -4,4 +4,4 @@ description=populate dropdown menu
 author=tyhol
 icon=icon.svg
 version=0.1
-homepage=
+homepage=https://github.com/TyHol/DeleteViaDropdown
