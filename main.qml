@@ -34,7 +34,7 @@ Item {
         modal: true
         font: Theme.defaultFont
         standardButtons: Dialog.Ok | Dialog.Cancel
-        title: qsTr("Layer Selection")
+        //title: qsTr("Delete ALL features")
         width: Math.min(mainWindow.width * 0.8, 400)
         x: (mainWindow.width - width) / 2
         y: (mainWindow.height - height) / 2
@@ -59,11 +59,68 @@ Item {
 
         onAccepted: {
             if (!layerSelector.currentText) return
-            selectedLayer = getLayerByName(layerSelector.currentText)
-            if (!selectedLayer) return
+            confirmationDialog.open()
+        }
+    }
 
-            if (delete_all_features(selectedLayer)) {
-                mainWindow.displayToast(qsTr("Cleared layer: %1").arg(layerSelector.currentText))
+    Dialog {
+        id: confirmationDialog
+        parent: mainWindow.contentItem
+        modal: true
+        font: Theme.defaultFont
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        title: qsTr("Just to be sure...\nDelete everything from '%1'?").arg(layerSelector.currentText)
+        width: Math.min(mainWindow.width * 0.8, 400)
+        x: (mainWindow.width - width) / 2
+        y: (mainWindow.height - height) / 2
+
+        Timer {
+            id: confirmationTimer
+            interval: 7000
+            onTriggered: {
+                confirmationDialog.reject()
+                mainWindow.displayToast(qsTr("Time expired. Please try again."))
+            }
+        }
+
+        ColumnLayout {
+            spacing: 10
+            width: parent.width
+
+            Label {
+                text: qsTr("Type 'abc' within 7 seconds to confirm deletion:")
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+            }
+
+            TextField {
+                id: confirmationInput
+                Layout.fillWidth: true
+                placeholderText: "abc"
+            }
+
+
+        }
+
+        onOpened: {
+            confirmationInput.text = ""
+            confirmationTimer.restart()
+        }
+
+        onClosed: {
+            confirmationTimer.stop()
+        }
+
+        onAccepted: {
+            if (confirmationInput.text === "abc") {
+                selectedLayer = getLayerByName(layerSelector.currentText)
+                if (!selectedLayer) return
+
+                if (delete_all_features(selectedLayer)) {
+                    mainWindow.displayToast(qsTr("Cleared layer: %1").arg(layerSelector.currentText))
+                }
+            } else {
+                mainWindow.displayToast(qsTr("Invalid confirmation text. Please try again."))
             }
         }
     }
@@ -75,7 +132,10 @@ Item {
         
         for (var id in layers) {
             var layer = layers[id]
-            if (layer && layer.supportsEditing) {
+            
+            // Check if layer exists and has required properties
+            if (layer && 
+                layer.supportsEditing ) {  
                 editableLayers.push(layer.name)
             }
         }
@@ -85,8 +145,8 @@ Item {
         layerSelector.currentIndex = editableLayers.length > 0 ? 0 : -1
         
         labelSelection.text = editableLayers.length > 0 
-            ? qsTr("Select editable layer:") 
-            : qsTr("No editable layers available")
+            ? qsTr("Delete ALL features from layer:") 
+            : qsTr("No editable layers")
     }
 
     function getLayerByName(name) {
