@@ -59,6 +59,7 @@ Item {
 
         onAccepted: {
             if (!layerSelector.currentText) return
+            confirmationInput.text = ""
             confirmationDialog.open()
         }
     }
@@ -78,8 +79,10 @@ Item {
             id: confirmationTimer
             interval: 7000
             onTriggered: {
+                
                 confirmationDialog.reject()
                 mainWindow.displayToast(qsTr("Time expired. Please try again."))
+                
             }
         }
 
@@ -103,16 +106,17 @@ Item {
         }
 
         onOpened: {
-            confirmationInput.text = ""
+            
             confirmationTimer.restart()
         }
 
         onClosed: {
-            confirmationTimer.stop()
+                    confirmationTimer.stop()
         }
 
         onAccepted: {
             if (confirmationInput.text === "abc") {
+                
                 selectedLayer = getLayerByName(layerSelector.currentText)
                 if (!selectedLayer) return
 
@@ -120,6 +124,7 @@ Item {
                     mainWindow.displayToast(qsTr("Cleared layer: %1").arg(layerSelector.currentText))
                 }
             } else {
+                
                 mainWindow.displayToast(qsTr("Invalid confirmation text. Please try again."))
             }
         }
