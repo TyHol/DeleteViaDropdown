@@ -3,5 +3,5 @@ name=Delete_Via_Dropdown
 description= Will delete ALL features in a selected (editable) layer - use with caution! (Suggest a filtered layer with disposable features)
 author=tyhol
 icon=icon.svg
-version=0.1
+version=0.3
 homepage=https://github.com/TyHol/DeleteViaDropdown
